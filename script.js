@@ -1,43 +1,54 @@
-// 1. Mengambil elemen dari HTML
+//  Mengambil elemen dari HTML
 const morseDisplay = document.getElementById("morse-code-display");
 const userInput = document.getElementById("user-input");
-const submitButton = document.getElementById("submit-button");
 const feedback = document.getElementById("feedback");
 const scoreDisplay = document.getElementById("score");
 
-// 2. Menentukan soal
-const question = {
-    morse: ".-.",
-    answer: "R"
-};
+//  Menentukan soal
+const questions = [
+    {morse: ".-"    , answer: "A"  },  {morse: "-..."   , answer: "B"  }, {morse: "-.-."    , answer: "C"  },
+    {morse: "-.."   , answer: "D"  },  {morse: "."      , answer: "E"  }, {morse: "..-."    , answer: "F"  },
+    {morse: "--."   , answer: "G"  },  {morse: "...."   , answer: "H"  }, {morse: ".."      , answer: "I"  },
+    {morse: ".---"  , answer: "J"  },  {morse: "-.-"    , answer: "K"  }, {morse: ".-.."    , answer: "L"  },
+    {morse: "--"    , answer: "M"  },  {morse: "-."     , answer: "N"  }, {morse: "---"     , answer: "O"  },
+    {morse: ".--."  , answer: "P"  },  {morse: "--.-"   , answer: "Q"  }, {morse: ".-."     , answer: "R"  },
+    {morse: "..."   , answer: "S"  },  {morse: "-"      , answer: "T"  }, {morse: "..-"     , answer: "U"  }, 
+    {morse: "...-"  , answer: "V"  },  {morse: ".--"    , answer: "W"  }, {morse: "-..-"    , answer: "X"  },
+    {morse: "-.--"  , answer: "Y"  },  {morse: "--.."   , answer: "Z"  },
+];
 
-// 3. Menampilkan soal ke halaman
+//  Menampilkan soal ke halaman
+let currentQuestionIndex = 0;
+const question = questions[currentQuestionIndex];
 morseDisplay.textContent = question.morse;
 
-// 4. Menyiapkan skor
+//  Menyiapkan skor
 let score = 0;
 let answeredCorrectly = false;
 
-// 5. Menjalankan fungsi ketika tombol diklik
-submitButton.addEventListener("click", function () {
+// 5. Memeriksa jawaban ketika Enter ditekan
+userInput.addEventListener("keydown", function (event) {
+    if (event.key !== "Enter") {
+        return;
+    }
+
+    event.preventDefault();
+
     const answer = userInput.value.trim().toUpperCase();
 
-    // Memeriksa apakah input kosong
     if (answer === "") {
         feedback.textContent = "Masukkan jawaban terlebih dahulu!";
         return;
     }
 
-    // Mencegah skor bertambah berkali-kali pada soal yang sama
     if (answeredCorrectly) {
-        feedback.textContent = "Kamu sudah menjawab soal ini dengan benar.";
+        feedback.textContent = "Kamu sudah menjawab dengan benar!";
         return;
     }
 
-    // Memeriksa jawaban pemain
     if (answer === question.answer) {
-        feedback.textContent = "Benar! Kode Morse tersebut adalah huruf R.";
-        score = score + 1;
+        feedback.textContent = "Benar!";
+        score++;
         scoreDisplay.textContent = score;
         answeredCorrectly = true;
     } else {

@@ -6,8 +6,34 @@ body {
     padding: 20px;
 }
 
+header {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #1f2937;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+#user-input {
+    border: none;
+    border-bottom: 2px solid #9ca3af;
+    outline: none;
+
+    background: transparent;
+    padding: 10px 5px;
+
+    font-size: 16px;
+    text-align: center;
+}
+
+#user-input:focus {
+    border-bottom-color: #2563eb;
+}
+
 h1 {
-    color: #1f2937;
+    color: #f5f6f7;
+    text-align: start;
 }
 
 #morse-code-display {
