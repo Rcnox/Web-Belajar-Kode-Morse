@@ -1,24 +1,42 @@
-# Morse Quest
+# Morse Quest — Game Pembelajaran Kode Morse
 
-## Deskripsi
+## 1. Deskripsi Proyek
 
-Morse Quest adalah website permainan edukatif yang dirancang untuk membantu pengguna mempelajari dan berlatih kode Morse secara interaktif. Website ini menyediakan mode pembelajaran dan tantangan berbasis waktu untuk meningkatkan kemampuan pengguna dalam mengenali serta memahami kode Morse.
+**Morse Quest** adalah website permainan edukatif yang dirancang untuk membantu pengguna mempelajari dan berlatih kode Morse melalui pengalaman belajar yang interaktif. Proyek ini menggabungkan pembelajaran dan permainan untuk membantu pengguna mengenali pola kode Morse serta melatih kecepatan dan ketepatan dalam menjawab soal.
 
-## Fitur
+Proyek ini dikembangkan menggunakan HTML, CSS, dan JavaScript sebagai penerapan keterampilan pengembangan web *front-end*.
 
-- **Welcome Screen** — halaman pembuka sebelum pengguna masuk ke permainan.
-- **Learn Mode** — mode untuk mempelajari dan mengenali kode Morse.
-- **Time Attack** — mode tantangan untuk menjawab soal kode Morse dalam batas waktu tertentu.
-- **Skor** — menampilkan hasil jawaban pengguna selama permainan.
-- **Umpan Balik** — memberikan informasi mengenai jawaban yang benar atau salah.
+## 2. Fitur
 
-## Teknologi yang Digunakan
+Fitur utama yang dikembangkan dalam proyek ini meliputi:
 
-- **HTML** — membangun struktur halaman website.
-- **CSS** — mengatur desain, warna, tata letak, dan tampilan website.
-- **JavaScript** — mengatur interaksi pengguna, logika permainan, soal, waktu, dan perhitungan skor.
+- **Halaman Pembuka:** halaman awal sebelum pengguna memasuki permainan.
+- **Learn Mode:** mode pembelajaran untuk mengenali dan mempelajari kode Morse.
+- **Time Attack:** mode tantangan untuk menjawab soal dalam batas waktu tertentu.
+- **Sistem Skor:** menghitung skor berdasarkan jawaban pengguna.
+- **Umpan Balik Jawaban:** memberikan informasi mengenai hasil jawaban pengguna.
 
-## Struktur Folder/File
+### Rencana Pengembangan
+
+Fitur yang direncanakan untuk pengembangan selanjutnya:
+
+- **Audio Kode Morse:** mengubah kode Morse menjadi bunyi pendek (*dit*) dan bunyi panjang (*dah*).
+- **Getaran Kode Morse:** merepresentasikan pola kode Morse melalui getaran perangkat yang mendukung.
+- **Konversi Teks ke Morse:** menerjemahkan teks menjadi rangkaian kode Morse.
+- **Konversi Morse ke Teks:** menerjemahkan kode Morse menjadi huruf atau kata.
+- **Latihan Mendengarkan:** melatih pengguna mengenali kode Morse berdasarkan bunyi.
+- **Statistik Pembelajaran:** menampilkan perkembangan skor dan hasil latihan pengguna.
+
+## 3. Teknologi yang Digunakan
+
+| Teknologi | Kegunaan |
+|---|---|
+| HTML5 | Menyusun struktur halaman website. |
+| CSS3 | Mengatur desain, tata letak, dan tampilan antarmuka. |
+| JavaScript | Mengatur interaksi pengguna dan logika permainan. |
+| Git dan GitHub | Mengelola versi kode dan menyimpan repository proyek. |
+
+## 4. Struktur Proyek
 
 ```text
 Morse-Quest/
@@ -31,30 +49,48 @@ Morse-Quest/
 ```
 
 Keterangan:
+
 - `web.html` — struktur halaman website.
-- `styles.css` — pengaturan tampilan dan desain website.
-- `script.js` — logika dan interaksi permainan.
-- `book.svg` — ikon untuk Learn Mode.
-- `stopwatch.svg` — ikon untuk Time Attack.
+- `styles.css` — pengaturan desain dan tata letak.
+- `script.js` — logika permainan dan interaksi pengguna.
+- `book.svg` — ikon untuk mode pembelajaran.
+- `stopwatch.svg` — ikon untuk mode tantangan berbasis waktu.
 - `README.md` — dokumentasi proyek.
 
-## Cara Menjalankan
+## 5. Cara Menjalankan
 
-1. Unduh atau clone repository proyek Morse Quest.
+1. Unduh atau kloning repository proyek.
 2. Buka folder proyek menggunakan Visual Studio Code.
-3. Pastikan seluruh file proyek berada dalam folder yang sama.
-4. Instal ekstensi **Live Server** jika belum tersedia.
-5. Klik kanan pada file `web.html`.
-6. Pilih **Open with Live Server**.
-7. Website akan terbuka di browser dan siap digunakan.
+3. Pastikan seluruh file yang diperlukan tersedia.
+4. Pasang ekstensi Live Server jika belum tersedia.
+5. Klik kanan file `web.html`, lalu pilih **Open with Live Server**.
+6. Website akan terbuka di browser.
 
-## Cara Penggunaan
+Proyek ini dapat dijalankan tanpa proses instalasi dependensi melalui npm selama masih menggunakan HTML, CSS, dan JavaScript biasa.
+
+## 6. Cara Penggunaan
 
 1. Buka website Morse Quest.
 2. Tekan tombol **START GAME** pada halaman pembuka.
-3. Pilih mode permainan yang tersedia:
-   - **Learn** untuk mempelajari kode Morse.
-   - **Time Attack** untuk menguji kecepatan menjawab soal.
+3. Pilih mode permainan yang tersedia.
 4. Ikuti instruksi pada mode yang dipilih.
-5. Perhatikan soal dan masukkan atau pilih jawaban yang sesuai.
-6. Lihat umpan balik dan skor yang diperoleh.
+5. Jawab soal sesuai kode Morse yang ditampilkan.
+6. Periksa umpan balik dan skor yang diperoleh.
+
+## 7. Kemampuan yang Diterapkan
+
+Proyek ini menjadi sarana penerapan dan pengembangan keterampilan berikut:
+
+- Menyusun struktur halaman menggunakan HTML.
+- Membuat antarmuka dan tata letak menggunakan CSS.
+- Mengelola interaksi pengguna menggunakan JavaScript.
+- Memanipulasi elemen halaman melalui DOM.
+- Menangani kejadian pengguna (*event handling*).
+- Mengembangkan logika soal, validasi jawaban, dan perhitungan skor.
+- Mengelola perubahan kode menggunakan Git dan GitHub.
+
+Kemampuan yang dicantumkan pada bagian ini perlu disesuaikan dengan implementasi aktual dalam kode proyek.
+
+## 8. Pengembangan Selanjutnya
+
+Pengembangan berikutnya berfokus pada peningkatan pengalaman belajar melalui audio kode Morse, pola getaran, fitur penerjemahan dua arah, latihan berbasis suara, serta statistik hasil pembelajaran.

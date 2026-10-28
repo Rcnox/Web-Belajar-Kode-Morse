@@ -378,3 +378,93 @@ body {
     .answer-grid { grid-template-columns: 1fr; }
     .input-box { flex-direction: column; }
 }
+
+/* --- TAMPILAN KAMUS MORSE (SEBELUM LATIHAN) --- */
+.dictionary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+    margin-bottom: 24px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+/* Kustomisasi scrollbar untuk kamus */
+.dictionary-grid::-webkit-scrollbar {
+    width: 8px;
+}
+.dictionary-grid::-webkit-scrollbar-thumb {
+    background-color: #4A5568;
+    border-radius: 4px;
+}
+
+.dictionary-item {
+    background-color: #171923;
+    border: 2px solid #4A5568;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transition: border-color 0.2s;
+}
+
+.dictionary-item:hover {
+    border-color: #FFC857;
+}
+
+.dictionary-item strong {
+    font-size: 1.5rem;
+    color: #FFC857;
+}
+
+.dictionary-item span {
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: monospace;
+    color: #E2E8F0;
+}
+
+.btn-primary {
+    background-color: #38A169; /* Warna hijau agar berbeda dari menu utama */
+    color: #FFFFFF;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 14px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    width: 100%;
+    max-width: 300px;
+}
+
+.btn-primary:hover {
+    background-color: #2F855A;
+    transform: translateY(-2px);
+}
+
+/* --- TOMBOL HINT (MODE LEARN) --- */
+.btn-hint {
+    background-color: transparent;
+    color: #FFC857;
+    border: 1px solid #FFC857;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-hint:hover {
+    background-color: #FFC857;
+    color: #171923;
+}

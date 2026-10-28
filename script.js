@@ -141,7 +141,7 @@ function showQuestion() {
             <h2>TIME ATTACK</h2>
             <div class="timer-box">
                 <span class="timer-label">WAKTU</span>
-                <span id="timer">00:${String(timeLeft).padStart(2, "0")}</span>
+                <span id="timer">00:${String(timeLeft > 0 ? timeLeft : 0).padStart(2, "0")}</span>
             </div>
         </div>
 
@@ -181,18 +181,36 @@ function showQuestion() {
             const feedback = document.getElementById("feedback");
             const buttons = gameContent.querySelectorAll(".answer-option");
 
+            // Matikan tombol agar tidak bisa di-spam klik
             buttons.forEach(item => { item.disabled = true; });
 
+            // LOGIKA BENAR / SALAH
             if (button.dataset.answer === question.answer) {
                 score++;
+                timeLeft += 2; // BONUS: Tambah 2 detik
                 document.getElementById("score").textContent = score;
-                feedback.textContent = "Benar!";
+                feedback.textContent = "Benar! (+2 Detik) ⏱️";
                 feedback.style.color = "#229b75";
             } else {
-                feedback.textContent = `Kurang tepat! Jawabannya ${question.answer}.`;
+                timeLeft -= 3; // PENALTI: Kurangi 3 detik
+                feedback.textContent = `Salah! Jawabannya ${question.answer}. (-3 Detik) ⏱️`;
                 feedback.style.color = "#e34f58";
             }
 
+            // Perbarui angka di layar secara instan agar efek waktu langsung terlihat
+            const timerDisplay = document.getElementById("timer");
+            if (timerDisplay) {
+                let displayTime = timeLeft > 0 ? timeLeft : 0;
+                timerDisplay.textContent = `00:${String(displayTime).padStart(2, "0")}`;
+            }
+
+            // Jika karena penalti waktu langsung habis (<= 0), langsung Game Over
+            if (timeLeft <= 0) {
+                endTimeAttack();
+                return; // Hentikan fungsi di sini agar tidak lanjut ke soal berikutnya
+            }
+
+            // Lanjut ke soal berikutnya setelah 0.6 detik
             nextQuestionTimeout = setTimeout(function () {
                 if (gameActive) {
                     showQuestion();
@@ -224,12 +242,45 @@ function endTimeAttack() {
 }
 
 // Mode Learn
+// Mode Learn (Menampilkan Kamus Terlebih Dahulu)
 function startLearn() {
     stopGame();
     gameTitle.textContent = "Learn";
-    showLearnQuestion();
+
+    // Merender tampilan Kamus Morse
+    gameContent.innerHTML = `
+        <div class="game-topbar">
+            <h2>LEARN MODE</h2>
+        </div>
+
+        <section class="question-card">
+            <h2>Kamus Kode Morse</h2>
+            <p id="question-number">Hafalkan kode Morse (A-Z) di bawah ini sebelum memulai latihan!</p>
+            
+            <div class="dictionary-grid">
+                ${questions.map(q => `
+                    <div class="dictionary-item">
+                        <strong>${q.answer}</strong>
+                        <span>${q.morse}</span>
+                    </div>
+                `).join("")}
+            </div>
+
+            <button id="start-practice-btn" class="btn-primary">Mulai Latihan</button>
+        </section>
+
+        <div class="game-actions">
+            <button id="back-to-menu" class="btn-secondary">Kembali ke Menu</button>
+        </div>
+    `;
+
+    // Tombol untuk lanjut ke sesi tebak soal
+    document.getElementById("start-practice-btn").addEventListener("click", showLearnQuestion);
+    // Tombol kembali
+    document.getElementById("back-to-menu").addEventListener("click", backToMenu);
 }
 
+// Menampilkan Pertanyaan Mode Learn (Tebak ketik) dengan Fitur Hint
 function showLearnQuestion() {
     currentLearnQuestion = questions[Math.floor(Math.random() * questions.length)];
 
@@ -239,7 +290,7 @@ function showLearnQuestion() {
         </div>
 
         <section class="question-card">
-            <p id="question-number">BELAJAR MORSE</p>
+            <p id="question-number">LATIHAN MENEBAK</p>
             <h2>Apa huruf dari kode Morse berikut?</h2>
             <div id="morse-code-display">${currentLearnQuestion.morse}</div>
         </section>
@@ -253,6 +304,7 @@ function showLearnQuestion() {
                        autocomplete="off">
                 <button id="check-answer">Periksa Jawaban</button>
             </div>
+            <button id="hint-btn" class="btn-hint">💡 Gunakan Hint</button>
             <div id="feedback" aria-live="polite"></div>
         </div>
 
@@ -263,8 +315,16 @@ function showLearnQuestion() {
 
     const input = document.getElementById("user-input");
     const feedback = document.getElementById("feedback");
+    const hintBtn = document.getElementById("hint-btn");
 
     input.focus();
+
+    // Logika tombol Hint
+    hintBtn.addEventListener("click", function() {
+        feedback.textContent = `💡 Petunjuk: Jawabannya adalah huruf ${currentLearnQuestion.answer}`;
+        feedback.style.color = "#FFC857";
+        input.focus(); // Mengembalikan kursor ke kolom ketik
+    });
 
     function checkAnswer() {
         const userVal = input.value.trim().toUpperCase();
@@ -273,12 +333,20 @@ function showLearnQuestion() {
         if (userVal === currentLearnQuestion.answer) {
             feedback.textContent = `Benar! ${currentLearnQuestion.morse} adalah huruf ${currentLearnQuestion.answer}.`;
             feedback.style.color = "#229b75";
+            
+            // Nonaktifkan input dan hint saat jawaban benar
+            input.disabled = true;
+            hintBtn.disabled = true;
+            
+            // Tunggu 1 detik lalu ganti soal
             setTimeout(() => {
                 showLearnQuestion();
             }, 1000);
         } else {
             feedback.textContent = `Belum tepat. Coba lagi!`;
             feedback.style.color = "#e34f58";
+            input.value = ""; // Mengosongkan input setelah salah
+            input.focus();
         }
     }
 
@@ -286,9 +354,9 @@ function showLearnQuestion() {
     input.addEventListener("keydown", function (event) {
         if (event.key === "Enter") checkAnswer();
     });
+    
     document.getElementById("back-to-menu").addEventListener("click", backToMenu);
 }
-
 // Menghentikan timer dan perpindahan soal
 function stopGame() {
     gameActive = false;
