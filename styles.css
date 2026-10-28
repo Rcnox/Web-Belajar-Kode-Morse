@@ -1,52 +1,380 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f2f5;
-    text-align: center;
-    margin: 0;
-    padding: 20px;
-}
-
-header {
-    width: 100%;
+* {
     box-sizing: border-box;
-    background-color: #1f2937;
-    padding: 20px;
-    text-align: center;
-    position: relative;
 }
 
-#user-input {
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #171923;
+    color: #EAEAF0;
+    text-align: center;
+}
+
+/* Pastikan elemen tersembunyi tidak tampil */
+[hidden] {
+    display: none !important;
+}
+
+/* --- 1. HALAMAN PEMBUKA (WELCOME) --- */
+#welcome {
+    min-height: 100vh;
+    width: 100%;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#welcome header,
+#welcome main {
+    width: 100%;
+}
+
+#welcome h1 {
+    position: static;
+    margin: 0 0 18px;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 1.2;
+}
+
+#welcome p {
+    position: static;
+    margin: 0 0 28px;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+}
+
+#welcome button {
+    width: auto;
+    min-width: 220px;
+    padding: 16px 32px;
     border: none;
-    border-bottom: 2px solid #9ca3af;
-    outline: none;
-
-    background: transparent;
-    padding: 10px 5px;
-
-    font-size: 16px;
-    text-align: center;
+    border-radius: 12px;
+    background-color: #FFC857;
+    color: #171923;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
 }
 
-#user-input:focus {
-    border-bottom-color: #2563eb;
+#welcome button:hover {
+    background-color: #FFD477;
+    transform: translateY(-2px);
 }
 
-h1 {
-    color: #f5f6f7;
-    text-align: start;
+#welcome button:active {
+    transform: scale(0.98);
+}
+
+/* --- 2. MENU PILIH MODE --- */
+#main-menu {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+#main-menu h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin: 0;
+}
+
+.mode-list {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.mode-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFC857;
+    color: #171923;
+    border: none;
+    border-radius: 20px;
+    padding: 40px 32px;
+    width: 100%;
+    max-width: 300px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+.mode-container:hover {
+    background-color: #FFD477;
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.mode-container h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.6rem;
+}
+
+.mode-container p {
+    margin: 0;
+    font-size: 1rem;
+    opacity: 0.85;
+}
+
+.mode-icon {
+    width: 110px;
+    height: 110px;
+    margin-bottom: 24px;
+}
+
+/* --- 3. LAYAR GAME (QUIZIZZ STYLE) --- */
+#game-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+#game-title {
+    display: none;
+}
+
+/* Topbar Game & Timer Kanan Atas */
+.game-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.game-topbar h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #E2E8F0;
+}
+
+.timer-box {
+    background-color: #2D3748;
+    border: 2px solid #FFC857;
+    padding: 8px 18px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.timer-label {
+    font-size: 0.85rem;
+    color: #A0AEC0;
+    font-weight: bold;
+}
+
+#timer {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #FFC857;
+}
+
+/* Kartu Pertanyaan Atas */
+.question-card {
+    background-color: #2D3748;
+    border-radius: 20px;
+    padding: 32px 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+#question-number {
+    font-size: 0.85rem;
+    color: #A0AEC0;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.question-card h2 {
+    margin: 0 0 16px 0;
+    font-size: 1.3rem;
+    color: #E2E8F0;
 }
 
 #morse-code-display {
-    font-size: 50px;
-    text-align: center;
-    margin: 20px auto;
-    color: #1f2937;
+    font-size: 4rem;
+    font-weight: bold;
+    letter-spacing: 12px;
+    color: #FFC857;
+    margin: 16px 0;
+    font-family: monospace;
 }
 
-#game-section {
-    background-color: white;
-    padding: 24px;
+/* Pilihan Ganda Time Attack (2 Kolom x 2 Baris) */
+.answer-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.answer-option {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    padding: 20px 24px;
+    border: none;
+    border-radius: 16px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: transform 0.15s, filter 0.15s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.answer-option:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.1);
+}
+
+.answer-option:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.answer-option span {
+    background: rgba(0, 0, 0, 0.25);
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-size: 1rem;
+}
+
+.option-red { background-color: #E53E3E; }
+.option-blue { background-color: #3182CE; }
+.option-green { background-color: #38A169; }
+.option-yellow { background-color: #D69E2E; }
+
+/* Input Ngetik Bawah untuk Mode Learn */
+.learn-input-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.input-box {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    max-width: 480px;
+}
+
+#user-input {
+    flex: 1;
+    padding: 16px 20px;
+    font-size: 1.3rem;
+    text-align: center;
+    border: 2px solid #4A5568;
+    border-radius: 14px;
+    background-color: #2D3748;
+    color: #FFFFFF;
+    outline: none;
+    text-transform: uppercase;
+}
+
+#user-input:focus {
+    border-color: #FFC857;
+}
+
+#check-answer {
+    padding: 16px 28px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #FFC857;
+    color: #171923;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.15s;
+}
+
+#check-answer:hover {
+    background-color: #FFD477;
+    transform: translateY(-2px);
+}
+
+#feedback {
+    min-height: 28px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+/* Game Footer & Navigasi */
+.game-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    font-size: 1.1rem;
+    color: #A0AEC0;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 2px solid #4A5568;
+    color: #EAEAF0;
+    padding: 12px 24px;
     border-radius: 12px;
-    max-width: 500px;
-    margin: 20px auto;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn-secondary:hover {
+    background-color: #2D3748;
+    border-color: #718096;
+}
+
+.game-actions {
+    margin-top: 16px;
+}
+
+#game-over h2 {
+    font-size: 2.2rem;
+    color: #FFC857;
+}
+
+#game-over p {
+    font-size: 1.2rem;
+    margin: 12px 0;
+}
+
+#restart-button {
+    background-color: #FFC857;
+    color: #171923;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 12px;
+}
+
+@media (max-width: 480px) {
+    #welcome h1 { font-size: 2.4rem; }
+    #welcome button { width: 100%; max-width: 280px; }
+    .answer-grid { grid-template-columns: 1fr; }
+    .input-box { flex-direction: column; }
 }

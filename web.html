@@ -8,28 +8,40 @@
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
+
 <body>
-    <header>
-        <h1>Game Kode Morse</h1>
-    </header>
+    <section id="welcome">
+        <header>
+            <h1>Morse Quest</h1>
+        </header>
+        <main>
+            <p>Learn • Play • Improve</p>
+            <button id="start-button">START GAME</button>
+        </main>
+    </section>
 
-    <main>
-        <section id="game-section">
-            <div id="morse-code-display"></div>
-        </section>
+    <section id="main-menu" hidden>
+        <h1>Pilih Mode</h1>
+        <div class="mode-list">
+            <button class="mode-container" data-mode="learn">
+                <img src="book.svg" class="mode-icon" alt="">
+                <h3>Learn</h3>
+                <p>Belajar kode Morse</p>
+            </button>
 
-        <section>
-            <input type="text" id="user-input" placeholder="Masukkan jawaban Anda">
-            <div id="feedback"></div>
-        </section>
+            <button class="mode-container" data-mode="time-attack">
+                <img src="stopwatch.svg" class="mode-icon" alt="">
+                <h3>Time Attack</h3>
+                <p>Tes kecepatanmu</p>
+            </button>
+        </div>
+    </section>
 
-        <section id="score-section">
-            <h2>Skor Anda: <span id="score">0</span></h2>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2026 Game Kode Morse. All rights reserved.</p>
-    </footer>
+    <section id="game-screen" hidden>
+        <h1 id="game-title">Learn</h1>
+        <div id="game-content">
+        
+        </div>
+    </section>
 </body>
 </html>
